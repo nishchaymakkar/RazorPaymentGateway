@@ -49,7 +49,7 @@ Update your `AndroidManifest.xml` file to include internet permission:
 
 ## License
 This project is open-source and available under the MIT License.
-
+[MIT License](LICENSE)
 ---
 
 This README provides a step-by-step guide to integrating Razorpay with an Android Jetpack Compose application. Let me know if you need any modifications!
