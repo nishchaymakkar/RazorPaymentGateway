@@ -2,11 +2,15 @@ package com.razor.paymentgateway.ui.viewmodel
 
 import android.app.Activity
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.razor.paymentgateway.data.config.RazorpayConfig
 import com.razor.paymentgateway.data.module.PaymentState
+import com.razor.paymentgateway.ui.snackbar.SnackbarController
+import com.razor.paymentgateway.ui.snackbar.SnackbarEvent
 import com.razorpay.Checkout
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import org.json.JSONObject
 
 class PaymentViewModel: ViewModel(){
@@ -52,6 +56,13 @@ class PaymentViewModel: ViewModel(){
 
     fun handelPaymentError(code: Int,message: String){
         _paymentState.value = PaymentState.Error(message)
+        viewModelScope.launch {
+            SnackbarController.sendEvent(
+                event = SnackbarEvent(
+                    message = "code: $code error:$message",
+                )
+            )
+        }
 
     }
 
